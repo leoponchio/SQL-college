@@ -1,0 +1,83 @@
+INSERT INTO user_address (country, state, city, zip_code, neighborhood, road, number_address, complement)
+VALUES
+('Brazil', 'São Paulo', 'São Paulo', '01000-000', 'Centro', 'Rua A', 123, 'Apto 101'),
+('Brazil', 'Rio de Janeiro', 'Rio de Janeiro', '20000-000', 'Copacabana', 'Av. Atlântica', 456, 'Casa'),
+('Brazil', 'Minas Gerais', 'Belo Horizonte', '30000-000', 'Savassi', 'Rua B', 789, 'Cobertura'),
+('Brazil', 'Bahia', 'Salvador', '40000-000', 'Barra', 'Av. Oceânica', 321, 'Prédio Comercial');
+
+INSERT INTO citizens (name, phone, email, id_user_address)
+VALUES
+('João Silva', '11999999999', 'joao.silva@example.com', 1),
+('Maria Oliveira', '21988888888', 'maria.oliveira@example.com', 2),
+('Carlos Souza', '31977777777', 'carlos.souza@example.com', 3),
+('Ana Lima', '71966666666', 'ana.lima@example.com', 4);
+
+INSERT INTO manager (name, phone, email, id_user_address)
+VALUES
+('Lucas Santos', '11955555555', 'lucas.santos@example.com', 1),
+('Fernanda Rocha', '21944444444', 'fernanda.rocha@example.com', 2),
+('Juliana Costa', '31933333333', 'juliana.costa@example.com', 3),
+('Rafael Almeida', '71922222222', 'rafael.almeida@example.com', 4);
+
+INSERT INTO notification (message, message_type, sent_at, id_citizens)
+VALUES
+('Nova ocorrência registrada', 'INFO', NOW(), 1),
+('Ocorrência atualizada', 'ALERT', NOW(), 2),
+('Feedback adicionado', 'INFO', NOW(), 3),
+('Notificação de prioridade alta', 'URGENT', NOW(), 4);
+
+INSERT INTO priorities (level)
+VALUES
+('Alta'),
+('Média'),
+('Baixa'),
+('Urgente');
+
+INSERT INTO occurence_address (country, state, city, zip_code, neighborhood, road, number_occurence, complement)
+VALUES
+('Brazil', 'São Paulo', 'São Paulo', '01001-000', 'Centro', 'Rua B', '567', 'Próximo ao metrô'),
+('Brazil', 'Rio de Janeiro', 'Rio de Janeiro', '20001-000', 'Copacabana', 'Rua C', '890', 'Em frente ao quiosque'),
+('Brazil', 'Minas Gerais', 'Belo Horizonte', '30001-000', 'Savassi', 'Rua D', '123', 'Perto da praça'),
+('Brazil', 'Bahia', 'Salvador', '40001-000', 'Barra', 'Av. Oceânica', '456', 'Ao lado do farol');
+
+INSERT INTO evaluations (rating, feedback)
+VALUES
+(5, 'Excelente atendimento'),
+(4, 'Razoável, mas rápido'),
+(3, 'Poderia melhorar'),
+(1, 'Atendimento ruim');
+
+INSERT INTO category (name)
+VALUES
+('Incêndio'),
+('Roubo'),
+('Deslizamento'),
+('Vandalismo');
+
+INSERT INTO occurrence (status, description, id_citizens, id_priorities, id_manager, id_address_occurrence, id_evaluations)
+VALUES
+('Aberto', 'Fogo em vegetação', 1, 1, 1, 1, 1),
+('Fechado', 'Assalto à mão armada', 2, 2, 2, 2, 2),
+('Em andamento', 'Deslizamento em área urbana', 3, 3, 3, 3, 3),
+('Cancelado', 'Relato de vandalismo', 4, 4, 4, 4, 4);
+
+INSERT INTO occurrence_category (id_occurrence, id_category)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
+
+INSERT INTO attachments (file_path, id_occurrence)
+VALUES
+('/path/to/image1.jpg', 1),
+('/path/to/document2.pdf', 2),
+('/path/to/report3.docx', 3),
+('/path/to/video4.mp4', 4);
+
+INSERT INTO history (change_description, changed_at, id_occurrence)
+VALUES
+('Status alterado para "Fechado"', NOW(), 1),
+('Adicionado feedback', NOW(), 2),
+('Alterado para "Em andamento"', NOW(), 3),
+('Ocorrência cancelada', NOW(), 4);
