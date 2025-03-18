@@ -1,0 +1,93 @@
+BEGIN;
+
+-- 1. Inserir dados na tabela user_address
+INSERT INTO user_address (country, state, city, zip_code, neighborhood, road, number_address, complement)
+VALUES 
+('Brasil', 'Amazonas', 'Manaus', '69000-000', 'Centro', 'Av. Getúlio Vargas', 123, 'Próximo ao mercado'),
+('Brasil', 'Amazonas', 'Manaus', '69020-000', 'Compensa', 'Rua 3', 456, 'Em frente ao posto de saúde'),
+('Brasil', 'Amazonas', 'Manaus', '69030-000', 'Aleixo', 'Rua das Flores', 789, 'Ao lado do supermercado');
+
+-- 2. Inserir dados na tabela citizens
+INSERT INTO citizens (name, phone, email, id_user_address)
+VALUES
+('Carlos Silva', '987654321', 'carlos.silva@email.com', 1),
+('Ana Costa', '912345678', 'ana.costa@email.com', 2),
+('Pedro Almeida', '934567890', 'pedro.almeida@email.com', 3);
+
+-- 3. Inserir dados na tabela manager
+INSERT INTO manager (name, phone, email, id_user_address)
+VALUES
+('João Pereira', '991234567', 'joao.pereira@email.com', 1),
+('Maria Oliveira', '922233344', 'maria.oliveira@email.com', 2);
+
+-- 4. Inserir dados na tabela priorities
+INSERT INTO priorities (level)
+VALUES
+('Baixa'),
+('Média'),
+('Alta');
+
+-- 5. Inserir dados na tabela occurence_address
+INSERT INTO occurence_address (country, state, city, zip_code, neighborhood, road, number_occurence, complement)
+VALUES
+('Brasil', 'Amazonas', 'Manaus', '69000-000', 'Centro', 'Av. Getúlio Vargas', '001', 'Próximo ao mercado'),
+('Brasil', 'Amazonas', 'Manaus', '69020-000', 'Compensa', 'Rua 3', '002', 'Em frente ao posto de saúde');
+
+-- 6. Inserir dados na tabela evaluations
+INSERT INTO evaluations (rating, feedback)
+VALUES
+(5, 'Excelente atendimento, rápido e eficiente.'),
+(3, 'O atendimento foi razoável, demorou um pouco.'),
+(4, 'Bom atendimento, poderia melhorar a comunicação.');
+
+-- 7. Inserir dados na tabela category
+INSERT INTO category (name)
+VALUES
+('Infraestrutura'),
+('Segurança'),
+('Saúde');
+
+-- 8. Inserir dados na tabela occurrence
+INSERT INTO occurrence (status, description, id_citizens, id_priorities, id_manager, id_address_occurrence, id_evaluations)
+VALUES
+('Aberta', 'Problema com a iluminação pública', 1, 2, 1, 1, 1),
+('Fechada', 'Falta de segurança na rua', 2, 3, 2, 2, 2),
+('Em andamento', 'Buraco na rua causando acidentes', 3, 1, 1, 1, 3);
+
+-- 9. Inserir dados na tabela occurrence_category
+INSERT INTO occurrence_category (id_occurrence, id_category)
+VALUES
+(1, 1),  -- Ocorrência 1 com categoria Infraestrutura
+(2, 2),  -- Ocorrência 2 com categoria Segurança
+(3, 3);  -- Ocorrência 3 com categoria Saúde
+
+-- 10. Inserir dados na tabela attachments
+INSERT INTO attachments (file_path, id_occurrence)
+VALUES
+('/uploads/iluminacao_publica.jpg', 1),
+('/uploads/falta_segurança.jpg', 2);
+
+-- 11. Inserir dados na tabela history
+INSERT INTO history (change_description, changed_at, id_occurrence)
+VALUES
+('Ocorrência criada para problema de iluminação pública.', CURRENT_TIMESTAMP, 1),
+('Ocorrência fechada após resolução do problema de segurança.', CURRENT_TIMESTAMP, 2),
+('Ocorrência registrada sobre o buraco na rua.', CURRENT_TIMESTAMP, 3);
+
+-- Confirmar as alterações
+COMMIT;
+
+BEGIN;
+
+-- Inserir notificações para os cidadãos
+INSERT INTO notification (message, message_type, sent_at, id_citizens)
+VALUES 
+('Sua solicitação foi recebida e está sendo processada.', 'Informativa', CURRENT_TIMESTAMP, 1),
+('Houve uma atualização no status da sua ocorrência.', 'Atualização', CURRENT_TIMESTAMP, 2),
+('Lembrete: Verifique o status da sua solicitação de segurança.', 'Lembrete', CURRENT_TIMESTAMP, 3),
+('Sua ocorrência de infraestrutura foi resolvida.', 'Conclusão', CURRENT_TIMESTAMP, 1),
+('Nova mensagem: Atualização sobre o problema de segurança.', 'Urgente', CURRENT_TIMESTAMP, 2);
+
+-- Confirmar as alterações
+COMMIT;
+
